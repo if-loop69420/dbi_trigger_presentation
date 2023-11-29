@@ -16,7 +16,6 @@
 	</ol>
 </Slide>
 
-
 <Slide id="syntax">
 	<Slide>
 		<h3>Syntax</h3>
@@ -153,15 +152,82 @@
 	</Slide>
 </Slide>
 
-<Slide>
+<!-- T-SQL Triggers -->
+<Slide id"syntax">
 	<Slide>
 		<h3>Syntax</h3>
 	</Slide>
 
+	<Slide animate>
+        <h3>T/SQL</h3>
+    </Slide>
+
+	<!-- DML Trigger -->
 	<Slide>
+		<h3>DML Trigger</h3>
+		<Code>
+			<pre>
+                CREATE TRIGGER tr_dml_example
+                ON table_name
+                AFTER INSERT, UPDATE, DELETE
+                AS
+                -- Trigger logic here
+			</pre>
+		</Code>
+	</Slide>
+
+	<!-- DDL Trigger -->
+	<Slide>
+		<h3>DDL Trigger</h3>
+		<Code>
+			<pre>
+                CREATE TRIGGER tr_ddl_example
+                ON DATABASE
+                FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+                AS
+                -- Trigger logic here
+			</pre>
+		</Code>
+	</Slide>
+
+	<!-- LOGON/LOGOFF Trigger -->
+	<Slide>
+		<h3>LOGON/LOGOFF Trigger</h3>
+		<Code>
+			<pre>
+                CREATE TRIGGER tr_logon_example
+                ON ALL SERVER
+                FOR LOGON
+                AS
+                -- Trigger logic here
+			</pre>
+		</Code>
+
+		<Code>
+			<pre>
+                CREATE TRIGGER tr_logoff_example
+                ON ALL SERVER
+                FOR LOGOFF
+                AS
+                -- Trigger logic here
+			</pre>
+		</Code>
+	</Slide>
+
+	<!-- System Trigger for T-SQL -->
+	<Slide style="display:flex; position: absolute; top: 10%">
 		<h3>T-SQL</h3>
+		<p>System Trigger</p>
+		<div style="display:grid; gap: 2% 5%; grid: auto / auto auto">
+			<div>
+				<p>Event Clause</p>
+				<img src="tsql_event_clause.gif" alt="insert trigger here" />
+			</div>
+			<!-- Add other clauses for T-SQL system trigger here -->
+		</div>
 	</Slide>
 </Slide>
+
 
 <Slide>
 
