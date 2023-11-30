@@ -2,6 +2,7 @@
 	import Slide from './slide.svelte'
 	import Code from './code.svelte'
 	import Notes from './notes.svelte'
+	import Markdown from './markdown.svelte';
 </script>
 
 <Slide id="titleslide">
@@ -250,13 +251,42 @@
 		<Code>
 			{`
 			CREATE OR REPLACE TRIGGER RowLevelTriggerExample
-			AFTER INSERT OR UPDATE OR DELETE OF Name ON TestTable
+			AFTER INSERT OR UPDATE OR DELETE OF salary ON TestTable
 			FOR EACH ROW
 			BEGIN
 				DBMS_OUTPUT.PUT_LINE('Name wurde geändert');
 			END;
 			`}
 		</Code>
+	</Slide>
+
+	<Slide>
+		<h3>PL/SQL</h3>
+		<p>Vor- und Nachteile</p>
+		<div style="display:grid; gap: 2% 5%; grid: auto / auto auto">
+			<Markdown>
+				{`
+					#### Vorteile (PL/SQL)
+					* Leistungsstark
+					* Bessere Performance
+					* Transaktionskontrolle
+					* Wiederverwendbarkeit
+					* Sicherheit 
+				`}
+			</Markdown>
+
+			<Markdown>
+				{`
+					#### Nachteile (PL/SQL)
+					* Plattformspezifisch
+					* Komplexität
+					* Skalierbarkeit
+					* Debugging und Testing
+					* Ressourcenverbrauch
+				`}
+			</Markdown>
+
+		</div>
 	</Slide>
 </Slide>
 
