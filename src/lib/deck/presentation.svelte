@@ -60,7 +60,7 @@
 
 	<Slide animate style="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
-		<p>Create Trigger</p>
+		<p>Mögliche Trigger</p>
 		<img 
 			src="plsql_trigger_source.gif" 
 			alt="insert trigger here"
@@ -81,7 +81,7 @@
 
 	<Slide animate tyle="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
-		<p>Create Trigger</p>
+		<p>Mögliche Trigger</p>
 		<img 
 			src="plsql_trigger_source.gif" 
 			alt="insert trigger here"
@@ -101,7 +101,7 @@
 
 	<Slide animate tyle="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
-		<p>Create Trigger</p>
+		<p>Mögliche Trigger</p>
 		<img 
 			src="plsql_trigger_source.gif" 
 			alt="insert trigger here"
@@ -117,11 +117,28 @@
 			alt="insert trigger here"
 			style="width: 125%"
 		/>
+
+	</Slide>
+
+	<Slide>
+		<h3>PL/SQL</h3>
+		<p>System Trigger</p>
+	
+		<Code id="code" lines style="width: 120%">
+			{`
+				CREATE OR REPLACE TRIGGER logon_echo_name AFTER LOGON ON DATABASE
+				BEGIN
+				    DBMS_OUTPUT.PUT_LINE(user);
+				END;
+				/
+			`}
+		</Code>
+
 	</Slide>
 
 	<Slide animate style="display:flex; position: absolute; top: 10%">
 		<h3>PL/SQL</h3>
-		<p>System Trigger</p>
+		<p>Andere Clauses</p>
 		<div style="display:grid; gap: 2% 5%; grid: auto / auto auto">
 			<div>
 				<p>Event Clause</p>
