@@ -9,7 +9,7 @@
     data-trim
     data-line-numbers={lines || null}
     data-noescape={noescape || null}
-    style="max-width: 100%; font-size: 0.8em;"
+    style="max-width: 100%; max-height: 100%; font-size: 0.7em;"
   >
     <slot />
   </code>

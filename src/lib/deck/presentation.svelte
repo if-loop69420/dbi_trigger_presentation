@@ -58,6 +58,21 @@
 		/>
 	</Slide>
 
+	<Slide animate>
+		<h3>PL/SQL</h3>
+		<p>DML Trigger Example</p>
+		<Code>
+			{`
+				CREATE OR REPLACE TRIGGER DMLTriggerExample
+				AFTER INSERT OR UPDATE OR DELETE ON TestTable
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('AFTER Trigger wurde ausgelöst');
+				END;
+			`}
+
+		</Code>
+	</Slide>
+
 	<Slide animate style="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
 		<p>Mögliche Trigger</p>
@@ -79,6 +94,19 @@
 		/>
 	</Slide>
 
+	<Slide>
+		<Code>
+			{`
+				CREATE OR REPLACE TRIGGER InsteadOfTriggerExample
+				INSTEAD OF INSERT OR UPDATE OR DELETE ON TestTable
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('INSTEAD OF Trigger wurde ausgelöst');
+				END;
+			`}
+
+		</Code>
+	</Slide>
+
 	<Slide animate tyle="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
 		<p>Mögliche Trigger</p>
@@ -89,6 +117,24 @@
 		/>
 	</Slide>
 
+	<Slide>
+		<h3>PL/SQL</h3>
+		<p>Alte und Neue Daten</p>
+		<Code>
+			{`
+				CREATE OR REPLACE TRIGGER DMLTriggerExample
+				AFTER INSERT OR UPDATE OR DELETE ON TestTable
+				FOR EACH ROW
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('AFTER Trigger wurde ausgelöst');
+					DBMS_OUTPUT.PUT_LINE(:OLD.Name);
+					DBMS_OUTPUT.PUT_LINE(:NEW.Name);
+				END;
+			`}
+		</Code>
+	</Slide>
+
+
 	<Slide animate style="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
 		<p>Compound Trigger</p>
@@ -98,6 +144,34 @@
 				style="width: 125%"
 		/>
 	</Slide>
+
+	<Slide>
+		<h3>PL/SQL</h3>
+		<p>Compound Trigger Example</p>
+		<Code>
+			{`
+			CREATE OR REPLACE TRIGGER CompoundTriggerExample
+			FOR INSERT OR UPDATE OR DELETE ON TestTable
+			COMPOUND TRIGGER
+				BEFORE STATEMENT IS
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('BEFORE STATEMENT');
+				END BEFORE STATEMENT;
+
+				AFTER STATEMENT IS
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('AFTER STATEMENT');
+				END AFTER STATEMENT;
+
+				AFTER EACH ROW IS
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('AFTER EACH ROW');
+				END AFTER EACH ROW;
+			END;
+			`}
+		</Code>
+	</Slide>
+
 
 	<Slide animate tyle="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
@@ -117,7 +191,6 @@
 				alt="insert trigger here"
 				style="width: 125%"
 		/>
-
 	</Slide>
 
 	<Slide>
@@ -170,6 +243,21 @@
 			</div>
 		</div>
 	</Slide>
+
+	<Slide>
+		<h3>PL/SQL</h3>
+		<p>Row Level Trigger</p>
+		<Code>
+			{`
+			CREATE OR REPLACE TRIGGER RowLevelTriggerExample
+			AFTER INSERT OR UPDATE OR DELETE OF Name ON TestTable
+			FOR EACH ROW
+			BEGIN
+				DBMS_OUTPUT.PUT_LINE('Name wurde geändert');
+			END;
+			`}
+		</Code>
+	</Slide>
 </Slide>
 
 <!-- T-SQL Triggers -->
@@ -215,10 +303,10 @@
 	</Slide>
 
 	<Slide>
-		<h3>After Trigger</h3>
+		<h3>DML Trigger</h3>
 		<Code>
 			{`
-			CREATE TRIGGER AfterTriggerExample
+			CREATE TRIGGER DMLTriggerExample
 			ON dbo.TestTable
 			AFTER INSERT, UPDATE, DELETE
 			AS
