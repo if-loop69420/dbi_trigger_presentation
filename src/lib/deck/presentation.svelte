@@ -283,24 +283,42 @@
             <div style="flex: 1;">
                 <h4>Vorteile (T/SQL)</h4>
                 <ul>
-                    <li>Breite Integration mit Microsoft-Produkten</li>
-                    <li>Transact-SQL-Sprachfunktionen</li>
-                    <li>Unterstützung von XML-Daten</li>
+                    <li>Prozedurale Programmierung</li>
+                    <li>Transaktionskontrolle</li>
+                    <li>Integration von .NET</li>
+                    <li>Optimierte Abfrageleistung</li>
+                    <li>Mehrere Datenbankobjekte</li>
                     <!-- Weitere Vorteile hinzufügen -->
                 </ul>
             </div>
             <div style="flex: 1;">
                 <h4>Nachteile (T/SQL)</h4>
                 <ul>
-                    <li>Plattformabhängig (Microsoft SQL Server)</li>
-                    <li>Begrenzte Unterstützung für einige PL/SQL-Funktionen</li>
-                    <li>Eingeschränkte Portabilität</li>
+                    <li>Plattformspezifisch</li>
+                    <li>Komplexität</li>
+                    <li>Begrenzte Unterstützung für fortgeschrittene Funktionen</li>
+                    <li>Abhängigkeit von der Datenbankplattform</li>
+                    <li>Eingeschränkte Werkzeugunterstützung</li>
                     <!-- Weitere Nachteile hinzufügen -->
                 </ul>
             </div>
         </div>
+        <Notes>
+            <h3>Erklärungen:</h3>
+            <ul>
+                <li><strong>Prozedurale Programmierung:</strong> T-SQL ermöglicht prozedurale Programmierung, was die Erstellung wiederverwendbarer Code-Logik auf der Datenbankebene erleichtert.</li>
+                <li><strong>Transaktionskontrolle:</strong> Mit Mechanismen wie COMMIT und ROLLBACK ermöglicht T-SQL die effektive Verwaltung von Transaktionen zur Sicherstellung der Datenkonsistenz.</li>
+                <li><strong>Integration von .NET:</strong> T-SQL kann nahtlos in Anwendungen integriert werden, die auf dem .NET-Framework basieren, was die Verbindung von Datenbankoperationen und Anwendungslogik erleichtert.</li>
+                <li><strong>Optimierte Abfrageleistung:</strong> Durch die Verwendung von Indexen und Abfrageoptimierern bietet T-SQL Mittel zur Verbesserung der Abfrageleistung, was zu schnelleren Datenbankabfragen führen kann.</li>
+                <li><strong>Mehrere Datenbankobjekte:</strong> T-SQL ermöglicht die Definition verschiedener Datenbankobjekte wie Tabellen, Ansichten, gespeicherte Prozeduren usw., was zu einer effizienten Datenbankstruktur führt.</li>
+                <li><strong>Plattformspezifisch:</strong> T-SQL ist spezifisch für Microsoft SQL Server und möglicherweise nicht mit anderen SQL-Datenbanken kompatibel, was die Portabilität des Codes beeinträchtigen kann.</li>
+                <li><strong>Komplexität:</strong> In komplexen Szenarien kann T-SQL-Code schwer zu verstehen und zu warten sein, insbesondere wenn Prozeduren und Trigger stark verschachtelt oder umfangreich sind.</li>
+                <li><strong>Begrenzte Unterstützung für fortgeschrittene Funktionen:</strong> Im Vergleich zu einigen anderen Datenbanksystemen bietet T-SQL möglicherweise weniger fortgeschrittene Funktionen und Optionen.</li>
+                <li><strong>Abhängigkeit von der Datenbankplattform:</strong> Da T-SQL speziell für SQL Server entwickelt wurde, ist der Code stark von den Funktionen und Einschränkungen dieser Plattform abhängig.</li>
+                <li><strong>Eingeschränkte Werkzeugunterstützung:</strong> Obwohl es einige ausgezeichnete Tools zur Entwicklung und Verwaltung von T-SQL gibt, kann die Unterstützung durch Tools im Vergleich zu anderen SQL-Varianten begrenzt sein.</li>
+            </ul>
+        </Notes>
     </Slide>
-
 </Slide>
 
 <Slide id="Beispiele">
