@@ -13,11 +13,46 @@
 <Slide id="table_of_contents">
 	<h3>Table Of Contents</h3>
 	<ol>
+		<li>Was ist ein Trigger?</li>
+		<li>Arten von Triggern</li>
 		<li>Syntax PL/SQL</li>
 		<li>Syntax T/SQL</li>
 		<li>Vor-/Nachteile</li>
 		<li>Live Demo</li>
 	</ol>
+</Slide>
+
+<Slide>
+	<h3>Was ist ein Trigger?</h3>
+	<p>
+		Ein Trigger ist ein Stück Code, dass automatisch ausgeführt wird, wenn eine bestimmte Aktion in einer Datenbank ausgeführt wird.
+		Es kann entweder vor, nach, oder anstatt der Effekte des Ereignisses ausgeführt werden, das es auslöst.
+	</p>
+</Slide>
+
+<Slide>
+	<h3>Arten von Triggern in PL/SQL vs. T-SQL</h3>
+	<div style="display: grid; grid: auto / auto auto; gap: 2% 5%">
+		<div>
+			<h4>T-SQL</h4>
+			<ul>
+				<li>After Trigger (Table)</li>
+				<li>Instead of Trigger (Table und View)</li>
+				<li>For Trigger (Views)</li>
+			</ul>
+		</div>
+		<div>
+			<h4>PL/SQL</h4>
+			<ul>
+				<li>Before Trigger</li>
+				<li>After Trigger</li>
+				<li>Instead of Trigger</li>
+				<li>Compound Trigger</li>
+				<li>System Trigger</li>
+				<li>For Trigger</li>
+			</ul>
+		</div>
+	</div>
 </Slide>
 
 <Slide id="syntax">
@@ -37,6 +72,11 @@
 				alt="insert trigger here"
 				style="width: 125%"
 		/>
+		<Code>
+			{`
+				CREATE OR ALTER TRIGGER TriggerExample ...
+			`}
+		</Code>
 	</Slide>
 
 	<Slide animate style="display:flex; justify-content:center;">
@@ -47,6 +87,11 @@
 				alt="insert trigger here"
 				style="width: 125%"
 		/>
+		<Code>
+			{`
+				CREATE OR ALTER TRIGGER TriggerExample ... ON TestTable ...
+			`}
+		</Code>
 	</Slide>
 
 	<Slide animate style="display:flex; justify-content:center;">
@@ -64,26 +109,23 @@
 		<p>DML Trigger Example</p>
 		<Code>
 			{`
-				CREATE OR REPLACE TRIGGER DMLTriggerExample
+				CREATE OR REPLACE TRIGGER AfterTriggerExample
 				AFTER INSERT OR UPDATE OR DELETE ON TestTable
 				BEGIN
 					DBMS_OUTPUT.PUT_LINE('AFTER Trigger wurde ausgelöst');
 				END;
 			`}
-
+		</Code>
+		<Code>
+			{`
+				CREATE OR REPLACE TRIGGER BeforeTriggerExample
+				BEFORE INSERT OR UPDATE OR DELETE ON TestTable
+				BEGIN
+					DBMS_OUTPUT.PUT_LINE('BEFORE Trigger wurde ausgelöst');
+				END; 
+			`}
 		</Code>
 	</Slide>
-
-	<Slide animate style="display:flex; justify-content:center;">
-		<h3>PL/SQL</h3>
-		<p>Mögliche Trigger</p>
-		<img
-				src="plsql_trigger_source.gif"
-				alt="insert trigger here"
-				style="width: 125%"
-		/>
-	</Slide>
-
 
 	<Slide animate style="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
@@ -96,6 +138,8 @@
 	</Slide>
 
 	<Slide>
+		<h3>PL/SQL</h3>
+		<p>Instead of DML Trigger</p>
 		<Code>
 			{`
 				CREATE OR REPLACE TRIGGER InsteadOfTriggerExample
@@ -104,18 +148,7 @@
 					DBMS_OUTPUT.PUT_LINE('INSTEAD OF Trigger wurde ausgelöst');
 				END;
 			`}
-
 		</Code>
-	</Slide>
-
-	<Slide animate tyle="display:flex; justify-content:center;">
-		<h3>PL/SQL</h3>
-		<p>Mögliche Trigger</p>
-		<img
-				src="plsql_trigger_source.gif"
-				alt="insert trigger here"
-				style="width: 125%"
-		/>
 	</Slide>
 
 	<Slide>
@@ -135,7 +168,6 @@
 		</Code>
 	</Slide>
 
-
 	<Slide animate style="display:flex; justify-content:center;">
 		<h3>PL/SQL</h3>
 		<p>Compound Trigger</p>
@@ -151,37 +183,60 @@
 		<p>Compound Trigger Example</p>
 		<Code>
 			{`
-			CREATE OR REPLACE TRIGGER CompoundTriggerExample
-			FOR INSERT OR UPDATE OR DELETE ON TestTable
+			CREATE OR REPLACE TRIGGER salary_check_trigger
+			FOR UPDATE OF salary ON employees
 			COMPOUND TRIGGER
-				BEFORE STATEMENT IS
-				BEGIN
-					DBMS_OUTPUT.PUT_LINE('BEFORE STATEMENT');
-				END BEFORE STATEMENT;
 
-				AFTER STATEMENT IS
-				BEGIN
-					DBMS_OUTPUT.PUT_LINE('AFTER STATEMENT');
-				END AFTER STATEMENT;
+					-- Statement-level trigger action
+					BEFORE STATEMENT IS
+					BEGIN
+							DBMS_OUTPUT.PUT_LINE('Statement-level trigger: Checking salary updates...');
+							-- Additional statement-level actions can be added here
+					END BEFORE STATEMENT;
 
-				AFTER EACH ROW IS
-				BEGIN
-					DBMS_OUTPUT.PUT_LINE('AFTER EACH ROW');
-				END AFTER EACH ROW;
-			END;
 			`}
 		</Code>
 	</Slide>
 
+	<Slide>
+		<Code>
+			{`
+			
+					-- Row-level trigger action
+					BEFORE EACH ROW IS
+					BEGIN
+							DBMS_OUTPUT.PUT_LINE('Row-level trigger: Checking employee ' || :OLD.employee_id || ' salary update...');
+							IF :NEW.salary < 1000 THEN
+									:NEW.salary := 1000; -- Set a minimum salary of 1000 if the new salary is less
+							ELSIF :NEW.salary > 100000 THEN
+									:NEW.salary := 100000; -- Set a maximum salary of 100000 if the new salary is more
+							END IF;
+					END BEFORE EACH ROW;
+			`}
+		</Code>
 
-	<Slide animate tyle="display:flex; justify-content:center;">
-		<h3>PL/SQL</h3>
-		<p>Mögliche Trigger</p>
-		<img
-				src="plsql_trigger_source.gif"
-				alt="insert trigger here"
-				style="width: 125%"
-		/>
+	</Slide>
+
+	<Slide>
+		<Code>
+			{`
+					-- Row-level trigger action after all rows have been processed
+					AFTER EACH ROW IS
+					BEGIN
+							DBMS_OUTPUT.PUT_LINE('Row-level trigger: Employee ' || :OLD.employee_id || ' salary updated to ' || :NEW.salary);
+							-- Additional row-level actions can be added here
+					END AFTER EACH ROW;
+
+					-- Statement-level trigger action after all rows have been processed
+					AFTER STATEMENT IS
+					BEGIN
+							DBMS_OUTPUT.PUT_LINE('Statement-level trigger: Salary updates checked.');
+							-- Additional statement-level actions can be added here
+					END AFTER STATEMENT;
+
+			END salary_check_trigger;
+			`}
+		</Code>
 	</Slide>
 
 	<Slide animate style="display:flex; justify-content:center;">
@@ -250,12 +305,17 @@
 		<p>Row Level Trigger</p>
 		<Code>
 			{`
-			CREATE OR REPLACE TRIGGER RowLevelTriggerExample
-			AFTER INSERT OR UPDATE OR DELETE OF salary ON TestTable
-			FOR EACH ROW
-			BEGIN
-				DBMS_OUTPUT.PUT_LINE('Name wurde geändert');
-			END;
+				CREATE OR REPLACE TRIGGER salary_audit_trigger
+				AFTER UPDATE OF salary ON employees
+				FOR EACH ROW
+				DECLARE
+						v_old_salary employees.salary%TYPE;
+				BEGIN
+						IF :NEW.salary != :OLD.salary THEN
+								INSERT INTO salary_audit (employee_id, old_salary, new_salary, change_date)
+								VALUES (:OLD.employee_id, :OLD.salary, :NEW.salary, SYSDATE);
+						END IF;
+				END;
 			`}
 		</Code>
 	</Slide>
@@ -268,10 +328,10 @@
 				{`
 					#### Vorteile (PL/SQL)
 					* Leistungsstark
+					* Mit Java(und anderen JVM Sprachen) kompatibel
 					* Bessere Performance
 					* Transaktionskontrolle
 					* Wiederverwendbarkeit
-					* Sicherheit 
 				`}
 			</Markdown>
 
@@ -322,21 +382,12 @@
 		</Notes>
 	</Slide>
 
-	<Slide>
-		<h3>Arten von Triggern</h3>
-
-		<ul>
-			<li>After Trigger (Table)</li>
-			<li>Instead of Trigger (Table und View)</li>
-			<li>For Trigger (Views)</li>
-		</ul>
-	</Slide>
 
 	<Slide>
-		<h3>DML Trigger</h3>
+		<h3>After Trigger</h3>
 		<Code>
 			{`
-			CREATE TRIGGER DMLTriggerExample
+			CREATE TRIGGER BananeInMeinemAfterTriggerExample
 			ON dbo.TestTable
 			AFTER INSERT, UPDATE, DELETE
 			AS
@@ -345,8 +396,6 @@
 			END;
 
 			INSERT INTO dbo.TestTable (Name) VALUES ('TestName');
-
-			SELECT * FROM dbo.AuditTable;
 			`}
 		</Code>
 	</Slide>
@@ -365,8 +414,6 @@
 
 			INSERT INTO dbo.TestTable (Name) VALUES ('TestName');
 			UPDATE dbo.TestView SET Name = 'UpdatedName' WHERE Name = 'TestName';
-			SELECT * FROM dbo.TestTable;
-			SELECT * FROM dbo.AuditTable;
 			`}
 		</Code>
 	</Slide>
@@ -519,6 +566,30 @@
 </Slide>
 
 <Slide id="Beispiele">
-	<h5>Live Demo</h5>
+	<h5 class="party">Live Demo Time</h5>
 </Slide>
+
+<style>
+	@keyframes partyTime {
+		0% {
+			color: #ff0000;
+		}
+		25% {
+			color: #00ff00;
+		}
+		50% {
+			color: #00e1f5;
+		}
+		75% {
+			color: #ffff00;
+		}
+		100% {
+			color: #ff00ff;
+		}
+	}
+
+	.party {
+		animation: partyTime infinite 1s;
+	}
+</style>
 

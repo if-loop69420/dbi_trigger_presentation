@@ -69,6 +69,7 @@ declare module '$env/static/private' {
 	export const LOGNAME: string;
 	export const XDG_SESSION_TYPE: string;
 	export const _ZPLUG_URL: string;
+	export const CUPS_DATADIR: string;
 	export const NIX_PATH: string;
 	export const SYSTEMD_EXEC_PID: string;
 	export const NIXPKGS_CONFIG: string;
@@ -134,6 +135,7 @@ declare module '$env/static/private' {
 	export const npm_package_json: string;
 	export const P9K_SSH: string;
 	export const _ZPLUG_CONFIG_SUBSHELL: string;
+	export const NIXOS_XDG_DESKTOP_PORTAL_CONFIG_DIR: string;
 	export const JOURNAL_STREAM: string;
 	export const XDG_DATA_DIRS: string;
 	export const LIBEXEC_PATH: string;
@@ -222,6 +224,7 @@ declare module '$env/dynamic/private' {
 		LOGNAME: string;
 		XDG_SESSION_TYPE: string;
 		_ZPLUG_URL: string;
+		CUPS_DATADIR: string;
 		NIX_PATH: string;
 		SYSTEMD_EXEC_PID: string;
 		NIXPKGS_CONFIG: string;
@@ -287,6 +290,7 @@ declare module '$env/dynamic/private' {
 		npm_package_json: string;
 		P9K_SSH: string;
 		_ZPLUG_CONFIG_SUBSHELL: string;
+		NIXOS_XDG_DESKTOP_PORTAL_CONFIG_DIR: string;
 		JOURNAL_STREAM: string;
 		XDG_DATA_DIRS: string;
 		LIBEXEC_PATH: string;
