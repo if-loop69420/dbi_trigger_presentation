@@ -36,9 +36,9 @@
 		<div>
 			<h4>T-SQL</h4>
 			<ul>
-				<li>After Trigger (Table)</li>
-				<li>Instead of Trigger (Table und View)</li>
-				<li>For Trigger (Views)</li>
+				<li>After Trigger</li>
+				<li>Instead of Trigger</li>
+				<li>For Trigger</li>
 			</ul>
 		</div>
 		<div>
